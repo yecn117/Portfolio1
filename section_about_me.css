@@ -40,11 +40,22 @@
     border-radius: 15px;
     margin-top: 15px;
     border: 3px solid white;
+    color: white;
+    transition: 150ms ease-in-out;
 }
 
 .pdf:hover{
     background-color: rgb(255, 0, 0);
     border: 3px solid rgb(255, 255, 255);
+}
+
+.download{
+    padding: 5px;
+    margin-left: 5px;
+    color: white;
+    background-color: red;
+    border-radius: 50px;
+    transition: 150ms ease-in-out;
 }
 
 @media(max-width: 800px){
