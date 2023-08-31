@@ -1,0 +1,200 @@
+#services_section{
+    padding: 70px 0;
+    background-color: var(--primary-color);
+}
+
+#services_section h2{
+    font-size: 50px;
+    text-align: center;
+}
+
+.flex_container{
+    margin-top: 50px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card{
+    width: 350px;
+    max-width: calc (90% - 40px);
+    background-color: var(--secondary-color);
+    border-radius: 100px;
+    padding: 60px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card *{
+    text-align: center;
+}
+
+.card .btn-edv{
+    cursor: pointer;
+}
+
+.edv{
+    margin-top: -40px;
+}
+
+.card a{
+    background-color: var(--main-brand-color);
+    width: min-content;
+    padding: 15px 50px;
+    border-radius: 50px;
+    margin: 0 auto;
+    text-decoration: none;
+    color: var(--text-color);
+    border: 4px solid var(--main-brand-color);
+    transition: 150ms ease-in-out;
+}
+
+.card a:hover{
+    background: transparent;
+}
+
+
+.checkbox {
+    display: none;
+  }
+  
+  .material-symbols-outlined.checkicon {
+    display: none;
+    cursor: pointer;
+  }
+  
+  .checkbox:checked + label .checkicon {
+    display: inline;
+  }
+
+.checkicon{
+    background-color: green;
+    width: min-content;
+    padding: 15px 50px;
+    border-radius: 50px;
+    border: 4px solid var(--main-brand-color);
+    transition: 150ms ease-in-out;
+}
+
+.card ul {
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+.card ul li {
+    text-align: left;
+    font-weight: bold;
+}
+
+.colored-box {
+    width: 200px;
+    height: 25px;
+    border: 1px solid rgb(121, 117, 117);
+    border-radius: 15px;
+    transition: 150ms ease-in-out;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.color-fill{
+    transition: 150ms ease-in-out;
+}
+
+.color-fill.eins {
+    width: 100%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.zwei {
+    width: 80%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.drei {
+    width: 70%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.vier {
+    width: 40%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.fünf {
+    width: 95%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.sechs {
+    width: 60%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.sieben {
+    width: 80%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.acht {
+    width: 80%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.neun {
+    width: 75%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.zehn {
+    width: 40%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.color-fill.elf {
+    width: 50%; /* Breite der Hintergrundfarbe */
+    height: 100%;
+    border-radius: 15px;
+    background-color: blue; /* Hintergrundfarbe des Kastens */
+}
+
+.colored-box:hover{
+    background-color: rgba(0, 0, 255, 0.3);
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.color-fill:hover{
+    background-color: white;
+    cursor: pointer;
+    color: black;
+}
+
+
+
+@media(max-width: 500px){
+    services_section h2{
+        font-size: 12vw;
+    }
+}
