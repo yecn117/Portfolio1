@@ -1,36 +1,44 @@
-#projects_section{
+#projects_section {
     padding: 70px 0;
     background-color: var(--light-secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-#projects_section h2{
+#projects_section h2 {
     font-size: 50px;
     text-align: center;
     color: rgb(255, 255, 255);
 }
 
-.projects_container{
-    width: min-content;
-    margin-left: 450px;
-    padding: 0 100px;
+/* Container zentriert und responsiv */
+.projects_container {
+    max-width: 1000px;
+    width: 90%;
+    padding: 40px;
     background-color: var(--secondary-color);
     border-radius: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
     margin-top: 50px;
 }
 
-.projects_container img{
-    width: 1000px;
-    height: 600px;
-    margin-bottom: 50px;
-    border-radius: 15px;
-    border: 15px solid var(--text-color);
-    
-}
-
-.projects_container h3{
+.projects_container h3 {
     font-size: 40px;
     text-align: center;
     color: var(--main-brand-color);
     padding: 10px;
 }
 
+/* Bilder responsiv und zentriert */
+.projects_container img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    border-radius: 15px;
+    border: 15px solid var(--text-color);
+}

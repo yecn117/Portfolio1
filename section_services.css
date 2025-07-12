@@ -1,3 +1,5 @@
+/* ─────────────  SERVICES  ───────────── */
+
 #services_section{
     padding: 70px 0;
     background-color: var(--primary-color);
@@ -18,34 +20,26 @@
 
 .card{
     width: 350px;
-    max-width: calc (90% - 40px);
+    max-width: calc(90% - 40px);
     background-color: var(--secondary-color);
     border-radius: 100px;
     padding: 60px 20px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 40px;
 }
 
-.card *{
-    text-align: center;
-}
+.card *{ text-align: center; }
 
-.card .btn-edv{
-    cursor: pointer;
-}
-
-.edv{
-    margin-top: -40px;
-}
+.edv{ margin-top: -40px; }
 
 .edv-liste h4{
     padding-bottom: 10px;
     font-size: 20px;
 }
 
+/* Link-Button in älteren Karten (nur falls noch vorhanden) */
 .card a{
     background-color: var(--main-brand-color);
     width: min-content;
@@ -57,152 +51,117 @@
     border: 4px solid var(--main-brand-color);
     transition: 150ms ease-in-out;
 }
+.card a:hover{ background: transparent; }
 
-.card a:hover{
-    background: transparent;
-}
+/* Fortschrittsbalken */
+.card ul{ list-style-type: decimal; padding: 0 80px; }
+.card ul li{ text-align: left; font-weight: bold; }
 
-
-.checkbox {
-    display: none;
-  }
-  
-  .material-symbols-outlined.checkicon {
-    display: none;
-    cursor: pointer;
-  }
-  
-  .checkbox:checked + label .checkicon {
-    display: inline;
-  }
-
-.checkicon{
-    background-color: green;
-    width: min-content;
-    padding: 15px 50px;
-    border-radius: 50px;
-    border: 4px solid var(--main-brand-color);
-    transition: 150ms ease-in-out;
-}
-
-.card ul {
-    list-style-type: decimal;
-    padding: 0 80px;
-}
-.card ul li {
-    text-align: left;
-    font-weight: bold;
-}
-
-.colored-box {
-    width: 200px;
-    height: 25px;
-    border: 1px solid rgb(121, 117, 117);
+.colored-box{
+    width: 200px; height: 25px;
+    border: 1px solid rgb(121,117,117);
     border-radius: 15px;
     transition: 150ms ease-in-out;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin: 15px 0 10px;
 }
-
 .color-fill{
+    display: flex; align-items: center; justify-content: center;
     transition: 150ms ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+.color-fill.eins  { width: 100%; background: blue; border-radius: 15px; }
+.color-fill.zwei  { width:  90%; background: blue; border-radius: 15px; }
+.color-fill.drei  { width:  80%; background: blue; border-radius: 15px; }
+.color-fill.vier  { width:  40%; background: blue; border-radius: 15px; }
+.color-fill.fünf  { width: 100%; background: blue; border-radius: 15px; }
+.color-fill.sechs { width:  70%; background: blue; border-radius: 15px; }
+.color-fill.sieben{ width:  80%; background: blue; border-radius: 15px; }
+.color-fill.acht  { width: 100%; background: blue; border-radius: 15px; }
+.color-fill.neun  { width:  95%; background: blue; border-radius: 15px; }
+.color-fill.zehn { width:  80%; background: blue; border-radius: 15px; }
+.color-fill.elf   { width:  65%; background: blue; border-radius: 15px; }
+
+.colored-box:hover{ background: rgba(0,0,255,0.3); border: 2px solid #fff; }
+.color-fill:hover { background: #fff; color:#000; cursor:pointer; }
+
+/* Checkbox verstecken */
+.checkbox{ display:none; }
+
+/* Umschalt-Button (Check ↔ Done) */
+.btn-toggle{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    cursor:pointer;
+}
+.btn{
+    padding:15px 50px;
+    border-radius:50px;
+    border:4px solid var(--main-brand-color);
+    text-align:center;
+    transition:150ms ease-in-out;
+    user-select:none;
+}
+.checkbox:not(:checked)+.btn-toggle .checkbtn{
+    background:var(--main-brand-color); color:var(--text-color); display:inline-block;
+}
+.checkbox:not(:checked)+.btn-toggle .donebtn{ display:none; }
+.checkbox:checked+.btn-toggle .checkbtn{ display:none; }
+.checkbox:checked+.btn-toggle .donebtn{
+    display:inline-block; background:green; color:#fff;
+}
+.btn:hover{ background:transparent; }
+
+/* Mobile Heading */
+@media(max-width:500px){
+    #services_section h2{ font-size:12vw; }
 }
 
-.color-fill.eins {
-    width: 100%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
+/* ─────────────  PROJECTS  ───────────── */
+
+#projects_section{
+    padding:70px 0;
+    background:var(--light-secondary-color);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
-.color-fill.zwei {
-    width: 80%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
+#projects_section h2{
+    font-size:50px;
+    text-align:center;
+    color:#fff;
 }
 
-.color-fill.drei {
-    width: 70%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
+/* Grid für beliebig viele Projekte */
+.projects_grid{
+    display:grid;
+    gap:50px;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    width:90%;
+    max-width:1200px;
+    margin-top:50px;
 }
 
-.color-fill.vier {
-    width: 40%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
+/* Einzelne Projektkarte */
+.project_card{
+    background:var(--secondary-color);
+    border-radius:40px;
+    padding:40px 20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:30px;
+}
+.project_card h3{
+    font-size:32px;
+    color:var(--main-brand-color);
+    text-align:center;
 }
 
-.color-fill.fünf {
-    width: 95%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.color-fill.sechs {
-    width: 60%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.color-fill.sieben {
-    width: 80%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.color-fill.acht {
-    width: 80%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.color-fill.neun {
-    width: 75%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.color-fill.zehn {
-    width: 40%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.color-fill.elf {
-    width: 50%; /* Breite der Hintergrundfarbe */
-    height: 100%;
-    border-radius: 15px;
-    background-color: blue; /* Hintergrundfarbe des Kastens */
-}
-
-.colored-box:hover{
-    background-color: rgba(0, 0, 255, 0.3);
-    border: 2px solid rgb(255, 255, 255);
-}
-
-.color-fill:hover{
-    background-color: white;
-    cursor: pointer;
-    color: black;
-}
-
-
-
-@media(max-width: 500px){
-    services_section h2{
-        font-size: 12vw;
-    }
+/* Bilder responsiv */
+.project_card img{
+    width:100%;
+    border-radius:15px;
+    border:10px solid var(--text-color);
+    height:auto;
 }

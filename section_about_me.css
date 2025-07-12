@@ -28,6 +28,13 @@
     line-height: 175%;
 }
 
+.text {
+  hyphens: auto;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+
 .link{
     text-decoration: none;
 }
