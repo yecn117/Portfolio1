@@ -1,44 +1,68 @@
 #projects_section {
-    padding: 70px 0;
-    background-color: var(--light-secondary-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  padding: 70px 0;
+  background-color: var(--light-secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #projects_section h2 {
-    font-size: 50px;
-    text-align: center;
-    color: rgb(255, 255, 255);
+  font-size: 50px;
+  text-align: center;
+  color: rgb(255, 255, 255);
 }
 
-/* Container zentriert und responsiv */
-.projects_container {
-    max-width: 1000px;
-    width: 90%;
-    padding: 40px;
-    background-color: var(--secondary-color);
-    border-radius: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    margin-top: 50px;
+/* ► Raster für Projekte: 4x4 (max 16 Karten sichtbar nebeneinander) */
+.projects_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  width: 90%;
+  max-width: 1600px;
+  margin-top: 50px;
 }
 
-.projects_container h3 {
-    font-size: 40px;
-    text-align: center;
-    color: var(--main-brand-color);
-    padding: 10px;
+/* ► Jede einzelne Projektkarte */
+.project_card {
+  background-color: var(--secondary-color);
+  border-radius: 40px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
-/* Bilder responsiv und zentriert */
-.projects_container img {
-    width: 100%;
-    max-width: 1000px;
-    height: auto;
-    border-radius: 15px;
-    border: 15px solid var(--text-color);
+/* ► Projekttitel */
+.project_card h3 {
+  font-size: 24px;
+  color: var(--main-brand-color);
+  text-align: center;
+}
+
+/* ► Raster für Bilder innerhalb eines Projekts: 4 Spalten */
+.img_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+/* ► Einzelne Bilder */
+.img_grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid var(--text-color);
+}
+
+.project_card h3 a {
+  text-decoration: none;
+  color: var(--main-brand-color);
+  transition: color 150ms ease-in-out;
+}
+
+.project_card h3 a:hover {
+  color: var(--text-color); /* oder z. B. var(--main-brand-color-light) */
 }
