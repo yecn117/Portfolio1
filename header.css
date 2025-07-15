@@ -9,6 +9,11 @@ header{
 .header_text{
     width: 850px;
 }
+.title{
+  color: var(--main-brand-color);
+  hyphens:auto;      
+  overflow-wrap:anywhere;  
+}
 .circle{
     height: 600px;
     width: 600px;
