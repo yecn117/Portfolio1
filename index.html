@@ -98,9 +98,9 @@
                         <div class="color-fill fünf">100%</div>
                     </div>
                 </li>
-                    <li>Excel 
+                    <li>Excel
                         <div class="colored-box">
-                            <div class="color-fill sechs">70%</div>
+                            <div class="color-fill sechs">80%</div>
                         </div>
                     </li>
                     <li>Powerpoint
@@ -127,19 +127,19 @@
                         <div class="color-fill acht">100%</div>
                     </div>
                 </li>
-                    <li>Python 
+                    <li>Python
                         <div class="colored-box">
-                            <div class="color-fill neun">80%</div>
+                            <div class="color-fill neun">85%</div>
                         </div>
                     </li>
                     <li>Javascript
                         <div class="colored-box">
-                            <div class="color-fill zehn">80%</div>
+                            <div class="color-fill zehn">90%</div>
                         </div>
                     </li>
                     <li>Java
                         <div class="colored-box">
-                            <div class="color-fill elf">65%</div>
+                            <div class="color-fill elf">70%</div>
                         </div>
                     </li>
                 </ul>
@@ -326,6 +326,58 @@
     if(e.key==='Escape')     btnClose.click();
   });
 })();
+
+// Scroll-Animationen für moderne Effekte
+document.addEventListener('DOMContentLoaded', function() {
+    // Typing-Effekt für den Titel
+    const title = document.querySelector('.title');
+    if (title) {
+        const originalText = title.innerHTML;
+        title.innerHTML = '<span class="typing-text">' + originalText + '</span>';
+    }
+
+    // Scroll-Animation Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Alle Elemente mit animate-on-scroll Klasse beobachten
+    const animateElements = document.querySelectorAll('.about_me_container, .card, .project_card, .grid_item');
+    animateElements.forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+
+    // Parallax-Effekt für Header
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const header = document.querySelector('header');
+        const circle = document.querySelector('.circle');
+
+        if (header && circle) {
+            const rate = scrolled * -0.5;
+            header.style.transform = `translateY(${rate}px)`;
+
+            const circleRate = scrolled * -0.3;
+            circle.style.transform = `translateY(${circleRate}px)`;
+        }
+    });
+
+    // Pulsierende Effekte für wichtige Elemente
+    const pulseElements = document.querySelectorAll('.pdf, nav ul');
+    pulseElements.forEach(el => {
+        el.classList.add('pulse-element');
+    });
+});
 </script>
 
 

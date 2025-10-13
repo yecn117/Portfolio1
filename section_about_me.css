@@ -1,37 +1,102 @@
 #about_me_section{
     padding: 100px 0;
-    background-color: var(--secondary-color);
+    background: var(--gradient-primary);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 100px;
     flex-wrap: wrap-reverse;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hintergrund-Dekoration */
+#about_me_section::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(41, 122, 227, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .about_me_container{
     width: 750px;
     max-width: 90%;
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    border-radius: 30px;
+    background: rgba(35, 41, 51, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-secondary);
+    transition: all 0.3s ease-out;
+}
+
+.about_me_container:hover{
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-primary);
 }
 
 #about_me_section img{
     width: 400px;
     border: 15px solid var(--text-color);
     max-width: calc(90%-30px);
+    border-radius: 30px;
+    transition: all 0.3s ease-out;
+    position: relative;
+    z-index: 2;
+    box-shadow: var(--shadow-secondary);
+}
+
+#about_me_section img:hover{
+    transform: scale(1.05) rotate(-2deg);
+    border-color: var(--main-brand-color);
+    box-shadow: var(--shadow-hover);
 }
 
 .about_me_container h2{
     font-size: 80px;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.about_me_container h2::after{
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
 }
 
 .about_me_container p{
     text-align: justify;
     line-height: 175%;
+    font-size: 18px;
+    color: var(--secondary-text-color);
+    margin-bottom: 30px;
 }
 
 .text {
-  hyphens: auto;
-  word-break: normal;
-  overflow-wrap: break-word;
+    hyphens: auto;
+    word-break: normal;
+    overflow-wrap: break-word;
+    position: relative;
 }
 
 
@@ -40,38 +105,95 @@
 }
 
 .pdf{
-    background-color: var(--main-brand-color);
+    background: var(--gradient-accent);
     width: fit-content;
-    padding: 10px;
+    padding: 15px 25px;
     display: flex;
-    border-radius: 15px;
-    margin-top: 15px;
-    border: 3px solid white;
+    align-items: center;
+    border-radius: 25px;
+    margin-top: 30px;
+    border: 3px solid transparent;
     color: white;
-    transition: 150ms ease-in-out;
+    transition: all 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.pdf::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease-out;
 }
 
 .pdf:hover{
-    background-color: rgb(255, 0, 0);
-    border: 3px solid rgb(255, 255, 255);
+    transform: translateY(-3px) scale(1.05);
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: var(--shadow-hover);
+}
+
+.pdf:hover::before{
+    left: 100%;
 }
 
 .download{
-    padding: 5px;
-    margin-left: 5px;
+    padding: 8px;
+    margin-left: 10px;
     color: white;
-    background-color: red;
-    border-radius: 50px;
-    transition: 150ms ease-in-out;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf:hover .download{
+    background: rgba(255,255,255,0.3);
+    transform: rotate(180deg) scale(1.1);
 }
 
 @media(max-width: 800px){
     #about_me_section{
         padding: 50px 0;
+        flex-direction: column;
+        text-align: center;
     }
 
-    #about_me_section h2{
+    .about_me_container{
+        width: 90%;
+        padding: 30px;
+        order: 2;
+    }
+
+    #about_me_section img{
+        width: 250px;
+        border-width: 8px;
+        order: 1;
+        margin-bottom: 30px;
+    }
+
+    .about_me_container h2{
         text-align: center;
         font-size: 12vw;
+    }
+
+    .about_me_container p{
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .pdf{
+        margin: 20px auto 0;
+        font-size: 14px;
+        padding: 12px 20px;
     }
 }
