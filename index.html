@@ -29,7 +29,7 @@
                 </ul>
             </nav>
             <h1>
-              Yakub Silêman Ercan,<br>
+              <span class="name-typing">Yakub Silêman Ercan,</span><br>
               <span class="title">Wirt&shy;schafts&shy;in&shy;for&shy;ma&shy;ti&shy;ker</span>
            </h1>
             <p class="subheading">Ideen zum Leben erwecken, Pixel für Pixel. Einfach und kreativ!</p>
@@ -40,12 +40,47 @@
     </header>
 
     <section id="about_me_section">
-        <img src="assets/img/resume.png" alt="Kein Bild verfügbar">
-        <div class="about_me_container">
+        <div class="info-list animate-on-scroll">
             <h2>Über Mich</h2>
-            <p class="text">Ich bin Yakub, IT-Affin mit einer großen Leidenschaft für Webentwicklung und Softwaredesign. Bereits durch mehrere Projekte – von Webseiten bis hin zu kleineren Anwendungen – konnte ich praktische Erfahrung sammeln, wovon einige direkt in meinem GitHub-Profil einsehbar sind. Besonders sicher fühle ich mich im Umgang mit Python, dem Framework Flask, sowie den gängigen Frontend-Technologien HTML, CSS und JavaScript. Im Rahmen meiner bisherigen Projekte habe ich bereits eigenständig Webseiten konzipiert, umgesetzt und betreut – vom Design über die Struktur bis hin zur Backend-Anbindung mit Flask. Darüber hinaus habe ich auch mit Java gearbeitet und dabei unter anderem kleine Minispiele programmiert, wodurch ich sowohl objektorientiertes Denken als auch sauberen Code-Stil vertiefen konnte. Mit jedem Projekt wächst nicht nur mein technisches Können, sondern auch mein Verständnis für saubere Architektur, Benutzerfreundlichkeit und effiziente Umsetzung. Ich arbeite gerne lösungsorientiert, eigeständig oder im Team, und strebe danach, mit jedem neuen Projekt dazuzulernen und mich stetig weiterzuentwickeln. Neben der technischen Umsetzung interessiere ich mich auch für die Wartung und Weiterentwicklung bestehender Systeme, wobei ich besonderes Augenmerk auf Übersichtlichkeit, Wartbarkeit und Benutzerfreundlichkeit lege. Meine bisherigen Erfahrungen haben mir nicht nur ein solides Fundament gegeben, sondern auch meine Begeisterung für die Softwareentwicklung weiter gestärkt.</p>
+            <ul class="bullet-list">
+                <li class="bullet-item" data-section="intro">
+                    <span class="bullet-icon">👨‍💻</span>
+                    <span class="bullet-text">Einführung & Hintergrund</span>
+                </li>
+                <li class="bullet-item" data-section="skills">
+                    <span class="bullet-icon">🛠️</span>
+                    <span class="bullet-text">Technische Fähigkeiten</span>
+                </li>
+                <li class="bullet-item" data-section="projects">
+                    <span class="bullet-icon">🚀</span>
+                    <span class="bullet-text">Projekte & Erfahrungen</span>
+                </li>
+                <li class="bullet-item" data-section="education">
+                    <span class="bullet-icon">📚</span>
+                    <span class="bullet-text">Ausbildung & Werdegang</span>
+                </li>
+                <li class="bullet-item" data-section="motivation">
+                    <span class="bullet-icon">💡</span>
+                    <span class="bullet-text">Motivation & Ziele</span>
+                </li>
+            </ul>
+        </div>
+        <div class="about_me_container">
+            <div class="about-content">
+                <p class="text" id="full-text">
+                    <span class="highlight-section" data-section="intro">Ich bin Yakub, IT-Affin mit einer großen Leidenschaft für Webentwicklung und Softwaredesign. Bereits durch mehrere Projekte – von Webseiten bis hin zu kleineren Anwendungen – konnte ich praktische Erfahrung sammeln, wovon einige direkt in meinem GitHub-Profil einsehbar sind.</span>
+                    <br>
+                    <span class="highlight-section" data-section="skills">Besonders sicher fühle ich mich im Umgang mit Python, dem Framework Flask, sowie den gängigen Frontend-Technologien HTML, CSS und JavaScript. Darüber hinaus habe ich auch mit Java gearbeitet und dabei unter anderem kleine Minispiele programmiert, wodurch ich sowohl objektorientiertes Denken als auch sauberen Code-Stil vertiefen konnte.</span>
+                    <br>
+                    <span class="highlight-section" data-section="projects">Im Rahmen meiner bisherigen Projekte habe ich bereits eigenständig Webseiten konzipiert, umgesetzt und betreut – vom Design über die Struktur bis hin zur Backend-Anbindung mit Flask. Mit jedem Projekt wächst nicht nur mein technisches Können, sondern auch mein Verständnis für saubere Architektur, Benutzerfreundlichkeit und effiziente Umsetzung.</span>
+                    <br>
+                    <span class="highlight-section" data-section="education">Als Wirtschaftsinformatiker verbinde ich technisches Know-how mit betriebswirtschaftlichem Denken. Meine bisherigen Erfahrungen haben mir nicht nur ein solides Fundament gegeben, sondern auch meine Begeisterung für die Softwareentwicklung weiter gestärkt.</span>
+                    <br>
+                    <span class="highlight-section" data-section="motivation">Ich arbeite gerne lösungsorientiert, eigenständig oder im Team, und strebe danach, mit jedem neuen Projekt dazuzulernen und mich stetig weiterzuentwickeln. Neben der technischen Umsetzung interessiere ich mich auch für die Wartung und Weiterentwicklung bestehender Systeme, wobei ich besonderes Augenmerk auf Übersichtlichkeit, Wartbarkeit und Benutzerfreundlichkeit lege.</span>
+                </p>
+            </div>
             <a class="link" href="/assets/documents/Yakub Ercan Lebenslauf.pdf">
-                <p class="pdf">Lebenslauf ~ Download 
+                <p class="pdf">Lebenslauf ~ Download
                     <span class="material-symbols-outlined download">download</span>
                 </p>
             </a>
@@ -329,11 +364,90 @@
 
 // Scroll-Animationen für moderne Effekte
 document.addEventListener('DOMContentLoaded', function() {
+    // Typing-Effekt für den Namen
+    const nameTyping = document.querySelector('.name-typing');
+    if (nameTyping) {
+        const originalName = nameTyping.textContent || nameTyping.innerText;
+        nameTyping.style.opacity = '0';
+        nameTyping.style.transform = 'translateY(20px)';
+
+        // Typing animation function
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '<span class="name-typing-content"></span>';
+            const typingSpan = element.querySelector('.name-typing-content');
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+
+            function type() {
+                if (i < text.length) {
+                    typingSpan.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Remove cursor after typing is complete
+                    setTimeout(() => {
+                        typingSpan.style.borderRight = 'none';
+                    }, 500);
+                }
+            }
+            type();
+        }
+
+        // Start name typing animation first
+        setTimeout(() => {
+            typeWriter(nameTyping, originalName, 100);
+        }, 300);
+    }
+
     // Typing-Effekt für den Titel
     const title = document.querySelector('.title');
     if (title) {
-        const originalText = title.innerHTML;
-        title.innerHTML = '<span class="typing-text">' + originalText + '</span>';
+        const originalText = title.textContent || title.innerText;
+        title.style.opacity = '0';
+        title.style.transform = 'translateY(20px)';
+
+        // Typing animation function
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '<span class="title-typing"></span>';
+            const typingSpan = element.querySelector('.title-typing');
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+
+            function type() {
+                if (i < text.length) {
+                    typingSpan.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Remove cursor after typing is complete
+                    setTimeout(() => {
+                        typingSpan.style.borderRight = 'none';
+                    }, 500);
+                }
+            }
+            type();
+        }
+
+        // Start title typing animation after name is done
+        setTimeout(() => {
+            typeWriter(title, originalText, 80);
+        }, 1500);
+    }
+
+    // Typing-Effekt für die Unterüberschrift
+    const subheading = document.querySelector('.subheading');
+    if (subheading) {
+        const originalSubheading = subheading.textContent || subheading.innerText;
+        subheading.style.opacity = '0';
+        subheading.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+            subheading.style.transition = 'all 0.6s ease-out';
+            subheading.style.opacity = '1';
+            subheading.style.transform = 'translateY(0)';
+        }, 3000); // Start after title is mostly done
     }
 
     // Scroll-Animation Observer
@@ -351,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Alle Elemente mit animate-on-scroll Klasse beobachten
-    const animateElements = document.querySelectorAll('.about_me_container, .card, .project_card, .grid_item');
+    const animateElements = document.querySelectorAll('.about_me_container, .info-list, .card, .project_card, .grid_item');
     animateElements.forEach(el => {
         el.classList.add('animate-on-scroll');
         observer.observe(el);
@@ -376,6 +490,64 @@ document.addEventListener('DOMContentLoaded', function() {
     const pulseElements = document.querySelectorAll('.pdf, nav ul');
     pulseElements.forEach(el => {
         el.classList.add('pulse-element');
+    });
+
+    // About Me Section Bullet Point Interactions
+    const bulletItems = document.querySelectorAll('.bullet-item');
+    const highlightSections = document.querySelectorAll('.highlight-section');
+
+    // Set first section as active by default
+    if (bulletItems.length > 0 && highlightSections.length > 0) {
+        bulletItems[0].classList.add('active');
+        highlightSections[0].classList.add('active');
+    }
+
+    bulletItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            // Remove active class from all items and sections
+            bulletItems.forEach(bullet => bullet.classList.remove('active'));
+            highlightSections.forEach(section => section.classList.remove('active'));
+
+            // Add active class to clicked item and corresponding section
+            item.classList.add('active');
+            if (highlightSections[index]) {
+                highlightSections[index].classList.add('active');
+
+                // Scroll the highlighted section into view
+                highlightSections[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+
+            // Add click animation
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                item.style.transform = 'scale(1.05)';
+            }, 100);
+        });
+
+        // Add keyboard navigation
+        item.setAttribute('tabindex', '0');
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
+            }
+        });
+    });
+
+    // Add intersection observer for bullet point animations
+    const bulletObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    bulletItems.forEach(item => {
+        bulletObserver.observe(item);
     });
 });
 </script>

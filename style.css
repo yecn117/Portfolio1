@@ -48,6 +48,24 @@ html {
     animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
 }
 
+.title-typing {
+    overflow: hidden;
+    border-right: 3px solid var(--main-brand-color);
+    white-space: nowrap;
+    animation: blink 1s step-end infinite;
+}
+
+.name-typing {
+    overflow: hidden;
+    border-right: 3px solid var(--main-brand-color);
+    white-space: nowrap;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
 /* Fade-in Animation für Scroll-Effekte */
 @keyframes fadeInUp {
     from {
