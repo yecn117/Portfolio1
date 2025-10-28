@@ -64,5 +64,5 @@
 }
 
 .project_card h3 a:hover {
-  color: var(--text-color); /* oder z. B. var(--main-brand-color-light) */
+  color: var(--text-color); /* oder z.B. var(--main-brand-color-light) */
 }

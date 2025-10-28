@@ -160,3 +160,21 @@ h3{
         font-size: 16px;
     }
 }
+
+@media(max-width: 480px){
+    .name-typing{
+        white-space: normal;
+        border-right: none;
+        animation: none;
+        display: block;
+    }
+
+    .title{
+        font-size: 9.5vw;
+        line-height: 1.2;
+    }
+
+    .subheading{
+        font-size: 4.2vw;
+    }
+}

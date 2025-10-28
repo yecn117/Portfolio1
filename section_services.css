@@ -158,6 +158,17 @@
 .btn:hover{ background:transparent; }
 
 /* Mobile Heading */
+@media(max-width:900px){
+    .card{
+        width: min(100%, 420px);
+    }
+}
+
+@media(max-width:600px){
+    .card ul{ padding: 0 12px; }
+    .colored-box{ width: 100%; }
+}
+
 @media(max-width:500px){
     #services_section h2{ font-size:12vw; }
 }
