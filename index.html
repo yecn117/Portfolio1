@@ -19,24 +19,28 @@
 <body>
     <header>
         <div class="header_text">
-            <nav>
-                <input type="checkbox" id="toggle_button">
-                <label for="toggle_button"><span class="material-symbols-rounded">menu</span></label>
-                <ul>
-                    <li><a href="#about_me_section">Über Mich</a></li>
-                    <li><a href="#services_section">Kenntnisse</a></li>
-                    <li><a href="#more_information_section">Mehr Informationen</a></li>
-                </ul>
-            </nav>
             <div class="hero_main">
-                <h1 class="hero-name">
-                    <span class="name-typing">Yakub Silêman Ercan,</span>
-                </h1>
-                <div class="circle">
-                    <img src="assets/img/portrait.jpeg"alt="Kein Bild von verfügbar">
+                <div class="hero_content">
+                    <nav>
+                        <input type="checkbox" id="toggle_button">
+                        <label for="toggle_button"><span class="material-symbols-rounded">menu</span></label>
+                        <ul>
+                            <li><a href="#about_me_section">&Uuml;ber Mich</a></li>
+                            <li><a href="#services_section">Kenntnisse</a></li>
+                            <li><a href="#more_information_section">Mehr Informationen</a></li>
+                        </ul>
+                    </nav>
+                    <div class="hero_identity">
+                        <h1 class="hero-name">
+                            <span class="name-typing">Yakub Sileman Ercan</span>
+                        </h1>
+                        <span class="title">Wirt&shy;schafts&shy;in&shy;for&shy;ma&shy;ti&shy;ker</span>
+                    </div>
+                    <p class="subheading">Ideen zum Leben erwecken, Pixel f&uuml;r Pixel. Einfach und kreativ!</p>
                 </div>
-                <span class="title">Wirt&shy;schafts&shy;in&shy;for&shy;ma&shy;ti&shy;ker</span>
-                <p class="subheading">Ideen zum Leben erwecken, Pixel für Pixel. Einfach und kreativ!</p>
+                <div class="circle">
+                    <img src="assets/img/portrait.jpeg" alt="Portr&auml;t von Yakub Sileman Ercan">
+                </div>
             </div>
         </div>
     </header>
@@ -366,76 +370,250 @@
 
 // Scroll-Animationen für moderne Effekte
 document.addEventListener('DOMContentLoaded', function() {
-    // Typing-Effekt für den Namen
-    const nameTyping = document.querySelector('.name-typing');
-    if (nameTyping) {
-        const originalName = nameTyping.textContent || nameTyping.innerText;
-        nameTyping.style.opacity = '0';
-        nameTyping.style.transform = 'translateY(20px)';
+    class ParticleAnimator {
+        constructor(element, options) {
+            this.element = element;
+            this.options = Object.assign({
+                dotSize: 2,
+                scatterRange: 60,
+                sampleGap: 6,
+                colors: ['#c7d5ff', '#79c8ff', '#4daeff'],
+                scatterDuration: 600,
+                gatherDuration: 800
+            }, options || {});
+            this.isPlaying = false;
+            this.canvas = null;
+            this.ctx = null;
+            this.particles = [];
+        }
 
-        // Typing animation function
-        function typeWriter(element, text, speed = 100) {
+        play() {
+            if (this.isPlaying) return;
+            const text = (this.element.textContent || '').trim();
+            if (!text) return;
+            this.isPlaying = true;
+            this.createCanvas();
+            this.generateParticles(text);
+            if (!this.particles.length) {
+                this.cleanup();
+                return;
+            }
+            this.element.style.visibility = 'hidden';
+            const scatterDuration = this.options.scatterDuration;
+            const gatherDuration = this.options.gatherDuration;
+            const total = scatterDuration + gatherDuration;
+            const particles = this.particles;
+            const scatterVectors = particles.map(() => {
+                const angle = Math.random() * Math.PI * 2;
+                const distance = this.options.scatterRange * (0.6 + Math.random() * 0.8);
+                return {
+                    dx: Math.cos(angle) * distance,
+                    dy: Math.sin(angle) * distance
+                };
+            });
+            const ctx = this.ctx;
+            const dotSize = this.options.dotSize;
+            const colors = this.options.colors;
+            const easeOut = t => 1 - Math.pow(1 - t, 2);
+            const easeInOut = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            const startTime = performance.now();
+
+            const animate = (time) => {
+                const elapsed = time - startTime;
+                ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                const scatterProgress = Math.min(1, elapsed / scatterDuration);
+                const gatherProgress = elapsed > scatterDuration
+                    ? Math.min(1, (elapsed - scatterDuration) / gatherDuration)
+                    : 0;
+
+                particles.forEach((particle, index) => {
+                    let currentX;
+                    let currentY;
+
+                    if (elapsed <= scatterDuration) {
+                        const eased = easeOut(scatterProgress);
+                        currentX = particle.x + scatterVectors[index].dx * eased;
+                        currentY = particle.y + scatterVectors[index].dy * eased;
+                    } else {
+                        const scatterX = particle.x + scatterVectors[index].dx;
+                        const scatterY = particle.y + scatterVectors[index].dy;
+                        const easedGather = easeInOut(gatherProgress);
+                        currentX = scatterX + (particle.x - scatterX) * easedGather;
+                        currentY = scatterY + (particle.y - scatterY) * easedGather;
+                    }
+
+                    ctx.fillStyle = colors[index % colors.length];
+                    ctx.globalAlpha = 0.95;
+                    ctx.fillRect(currentX, currentY, dotSize, dotSize);
+                });
+                ctx.globalAlpha = 1;
+
+                if (elapsed < total) {
+                    requestAnimationFrame(animate);
+                } else {
+                    this.cleanup();
+                }
+            };
+
+            requestAnimationFrame(animate);
+        }
+
+        createCanvas() {
+            if (this.canvas && this.canvas.parentNode) {
+                this.canvas.parentNode.removeChild(this.canvas);
+            }
+            const rect = this.element.getBoundingClientRect();
+            const canvas = document.createElement('canvas');
+            const padding = Math.max(
+                this.options.canvasPadding || 0,
+                this.options.scatterRange ? this.options.scatterRange * 1.2 : 0,
+                32
+            );
+            const width = Math.max(Math.round(rect.width + padding * 2), 1);
+            const height = Math.max(Math.round(rect.height + padding * 2), 1);
+            canvas.width = width;
+            canvas.height = height;
+            canvas.style.position = 'absolute';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.left = `${rect.left + window.scrollX - padding}px`;
+            canvas.style.top = `${rect.top + window.scrollY - padding}px`;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            canvas.style.zIndex = '40';
+            document.body.appendChild(canvas);
+            this.canvas = canvas;
+            this.ctx = canvas.getContext('2d');
+            this.padding = padding;
+        }
+
+        generateParticles(text) {
+            const ctx = this.ctx;
+            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            const style = window.getComputedStyle(this.element);
+            const fontSize = parseFloat(style.fontSize);
+            const fontWeight = style.fontWeight || '400';
+            const fontFamily = style.fontFamily || 'sans-serif';
+            const textAlign = style.textAlign || 'left';
+            ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+            ctx.fillStyle = '#fff';
+            ctx.textBaseline = 'top';
+            ctx.textAlign = textAlign;
+            const metrics = ctx.measureText(text);
+            const ascent = metrics.actualBoundingBoxAscent || fontSize;
+            const descent = metrics.actualBoundingBoxDescent || (fontSize * 0.25);
+            const textHeight = ascent + descent;
+            const padding = this.padding || 0;
+            const availableHeight = this.canvas.height - padding * 2;
+            const y = padding + Math.max(0, (availableHeight - textHeight) / 2);
+            let x;
+            if (textAlign === 'center') {
+                x = this.canvas.width / 2;
+            } else if (textAlign === 'right' || textAlign === 'end') {
+                x = this.canvas.width - padding;
+            } else {
+                x = padding;
+            }
+            ctx.fillText(text, x, y);
+
+            const imageData = ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data;
+            const gap = Math.max(2, this.options.sampleGap);
+            const particles = [];
+            for (let py = 0; py < this.canvas.height; py += gap) {
+                for (let px = 0; px < this.canvas.width; px += gap) {
+                    const index = (py * this.canvas.width + px) * 4 + 3;
+                    if (imageData[index] > 150) {
+                        const color = this.options.colors[Math.floor(Math.random() * this.options.colors.length)];
+                        particles.push({ x: px, y: py, color });
+                    }
+                }
+            }
+            this.particles = particles;
+            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+
+        cleanup() {
+            this.element.style.visibility = '';
+            if (this.canvas && this.canvas.parentNode) {
+                this.canvas.parentNode.removeChild(this.canvas);
+            }
+            this.canvas = null;
+            this.ctx = null;
+            this.particles = [];
+            this.isPlaying = false;
+        }
+    }
+
+    function setupParticleEffect(element, options = {}) {
+        if (!element || element.dataset.particleReady === 'true') return;
+        element.dataset.particleReady = 'true';
+        const animator = new ParticleAnimator(element, options);
+        const trigger = () => animator.play();
+        element.addEventListener('mouseenter', trigger);
+        element.addEventListener('focus', trigger);
+        element.addEventListener('touchstart', trigger, { passive: true });
+        if (typeof options.autoPlayDelay === 'number') {
+            setTimeout(trigger, options.autoPlayDelay);
+        }
+    }
+
+    function runTypewriter(element, text, { speed = 100, delay = 0, spanClass = 'typing-span', onComplete } = {}) {
+        if (!element) return;
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+
+        const startTyping = () => {
             let i = 0;
-            element.innerHTML = '<span class="name-typing-content"></span>';
-            const typingSpan = element.querySelector('.name-typing-content');
+            element.innerHTML = `<span class="${spanClass}"></span>`;
+            const typingSpan = element.querySelector(`.${spanClass}`);
+            if (!typingSpan) return;
             element.style.opacity = '1';
             element.style.transform = 'translateY(0)';
 
-            function type() {
+            const type = () => {
                 if (i < text.length) {
                     typingSpan.textContent += text.charAt(i);
                     i++;
                     setTimeout(type, speed);
                 } else {
-                    // Remove cursor after typing is complete
                     setTimeout(() => {
                         typingSpan.style.borderRight = 'none';
-                    }, 500);
+                        element.textContent = text;
+                        if (typeof onComplete === 'function') {
+                            onComplete();
+                        }
+                    }, 420);
                 }
-            }
-            type();
-        }
+            };
 
-        // Start name typing animation first
-        setTimeout(() => {
-            typeWriter(nameTyping, originalName, 100);
-        }, 300);
+            type();
+        };
+
+        setTimeout(startTyping, delay);
+    }
+
+    // Typing-Effekt für den Namen
+    const nameTyping = document.querySelector('.name-typing');
+    if (nameTyping) {
+        const originalName = nameTyping.textContent || nameTyping.innerText;
+        runTypewriter(nameTyping, originalName, {
+            speed: 100,
+            delay: 300,
+            spanClass: 'name-typing-content',
+            onComplete: () => setupParticleEffect(nameTyping, { autoPlayDelay: 1400, scatterRange: 80, dotSize: 2.4 })
+        });
     }
 
     // Typing-Effekt für den Titel
     const title = document.querySelector('.title');
     if (title) {
         const originalText = title.textContent || title.innerText;
-        title.style.opacity = '0';
-        title.style.transform = 'translateY(20px)';
-
-        // Typing animation function
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '<span class="title-typing"></span>';
-            const typingSpan = element.querySelector('.title-typing');
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-
-            function type() {
-                if (i < text.length) {
-                    typingSpan.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    // Remove cursor after typing is complete
-                    setTimeout(() => {
-                        typingSpan.style.borderRight = 'none';
-                    }, 500);
-                }
-            }
-            type();
-        }
-
-        // Start title typing animation after name is done
-        setTimeout(() => {
-            typeWriter(title, originalText, 80);
-        }, 1500);
+        runTypewriter(title, originalText, {
+            speed: 80,
+            delay: 1500,
+            spanClass: 'title-typing',
+            onComplete: () => setupParticleEffect(title, { autoPlayDelay: 2000, scatterRange: 65, dotSize: 2 })
+        });
     }
 
     // Typing-Effekt für die Unterüberschrift
@@ -489,7 +667,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Pulsierende Effekte für wichtige Elemente
-    const pulseElements = document.querySelectorAll('.pdf, nav ul');
+    const pulseElements = document.querySelectorAll('.pdf');
     pulseElements.forEach(el => {
         el.classList.add('pulse-element');
     });
