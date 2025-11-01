@@ -27,6 +27,7 @@
                         <ul>
                             <li><a href="#about_me_section">&Uuml;ber Mich</a></li>
                             <li><a href="#services_section">Kenntnisse</a></li>
+                            <li><a href="#projects_section">Projekte</a></li>
                             <li><a href="#more_information_section">Mehr Informationen</a></li>
                         </ul>
                     </nav>
@@ -304,6 +305,10 @@
             </div>
         </div>
     </footer>
+
+    <button type="button" id="scrollTopButton" class="scroll-top" aria-label="Nach oben scrollen">
+        <span class="material-symbols-rounded">north</span>
+    </button>
 
     <!-- Lightbox (einmal global) -->
    <div id="lightbox" class="lb-hidden">
@@ -725,6 +730,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1 });
+
+    const scrollTopButton = document.getElementById('scrollTopButton');
+    if (scrollTopButton) {
+        const toggleScrollTop = () => {
+            const shouldShow = window.pageYOffset > 400;
+            scrollTopButton.classList.toggle('scroll-top--visible', shouldShow);
+        };
+
+        window.addEventListener('scroll', toggleScrollTop, { passive: true });
+        toggleScrollTop();
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        scrollTopButton.addEventListener('click', () => {
+            const behavior = prefersReducedMotion ? 'auto' : 'smooth';
+            window.scrollTo({ top: 0, behavior });
+        });
+
+        scrollTopButton.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                scrollTopButton.click();
+            }
+        });
+    }
 
     bulletItems.forEach(item => {
         bulletObserver.observe(item);

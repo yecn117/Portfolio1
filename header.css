@@ -7,7 +7,7 @@ header{
     flex-wrap: wrap;
     position: relative;
     background: var(--gradient-secondary);
-    background-attachment: fixed;
+    background-attachment: scroll;
     min-height: 85vh;
 }
 
@@ -69,7 +69,7 @@ header{
 .hero_main .circle{
     justify-self: end;
     align-self: flex-start;
-    margin-top: clamp(16px, 2vw, 40px);
+    margin-top: clamp(32px, 5vw, 96px);
     margin-left: clamp(78px, 9vw, 240px);
 }
 
@@ -309,6 +309,7 @@ label[for="toggle_button"] span{
         max-width: 100%;
         justify-self: start;
         align-self: start;
+        margin-top: clamp(-40px, -5vw, -20px);
         margin-bottom: 0;
     }
 
@@ -356,7 +357,7 @@ label[for="toggle_button"] span{
         grid-area: circle;
         justify-self: end;
         align-self: center;
-        margin-top: 0;
+        margin-top: clamp(40px, 6vw, 120px);
         margin-left: clamp(90px, 9vw, 260px);
     }
 
@@ -499,14 +500,19 @@ label[for="toggle_button"] span{
 
     .hero_main .circle{
         justify-self: center;
-        margin-left: 0;
+        align-self: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero_main .title{
-        padding: 14px 32px;
+        padding: 0;
         font-size: clamp(2.1rem, 6.5vw, 3.4rem);
         letter-spacing: 0.07em;
-        box-shadow: 0 14px 28px rgba(41, 122, 227, 0.2);
+        box-shadow: none;
+        border: 0;
+        background: none;
+        display: inline;
     }
 
     .hero_main .title,
@@ -520,7 +526,8 @@ label[for="toggle_button"] span{
         width: 300px;
         border-width: 10px;
         border-color: rgba(41, 122, 227, 0.82);
-        margin-left: 0;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -581,20 +588,22 @@ label[for="toggle_button"] span{
         width: clamp(200px, 60vw, 240px);
         border-width: 8px;
         border-color: rgba(41, 122, 227, 0.82);
-        margin-left: 0;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero_main .title{
         font-size: clamp(1.6rem, 5.6vw, 2.2rem);
-        padding: clamp(11px, 4vw, 16px) clamp(22px, 7vw, 32px);
+        padding: 0;
         letter-spacing: 0.04em;
-        border-width: 1px;
-        box-shadow: 0 10px 20px rgba(41, 122, 227, 0.18);
+        border-width: 0;
+        border: 0;
+        box-shadow: none;
+        background: none;
     }
 
     .hero_main .title::after{
-        left: -40%;
-        width: 55%;
+        display: none;
     }
 
     .hero_main .subheading{

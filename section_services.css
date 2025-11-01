@@ -171,6 +171,13 @@
 
 @media(max-width:500px){
     #services_section h2{ font-size:12vw; }
+    .card h3{
+        font-size: clamp(1.4rem, 7vw, 1.9rem);
+        line-height: 1.15;
+        hyphens: auto;
+        word-break: break-word;
+    }
+    .card ul{ padding: 0 4px; }
 }
 
 /* ─────────────  PROJECTS  ───────────── */
